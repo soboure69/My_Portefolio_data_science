@@ -1,0 +1,46 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: |
+          npm install -g tailwindcss
+          npm install
+
+      - name: Build
+        run: |
+          npx tailwindcss -i ./src/input.css -o ./css/style.css --minify
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: .
+          branch: gh-pages
+          clean: true
+          clean-exclude: |
+            .git/
+            .github/
+            node_modules/
+            src/
+            .gitignore
+            README.md
+            package*.json
+            tailwind.config.js
+          commit-message: "Deploy: $(date +'%d/%m/%Y %H:%M')"

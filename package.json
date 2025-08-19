@@ -1,0 +1,30 @@
+{
+  "name": "portfolio-data-science",
+  "version": "1.0.0",
+  "description": "Portfolio professionnel pour un Data Scientist",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx tailwindcss -i ./src/input.css -o ./css/style.css --watch",
+    "build": "npx tailwindcss -i ./src/input.css -o ./css/style.css --minify",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "portfolio",
+    "data-science",
+    "machine-learning",
+    "data-analysis"
+  ],
+  "author": "Votre Nom",
+  "license": "MIT",
+  "devDependencies": {
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/forms": "^0.5.3",
+    "@tailwindcss/typography": "^0.5.9",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.24",
+    "tailwindcss": "^3.3.2"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.4.0"
+  }
+}

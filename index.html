@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Data Scientist - [Votre Nom]</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .skill-bar {
+            transition: width 1s ease-in-out;
+        }
+        .typing-animation {
+            border-right: 2px solid #667eea;
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0%, 50% { border-color: transparent; }
+            51%, 100% { border-color: #667eea; }
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .project-image, .article-image, .certificate-image {
+            height: 200px;
+            overflow: hidden;
+            border-radius: 0.5rem 0.5rem 0 0;
+        }
+        .project-image img, .article-image img, .certificate-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .project-image:hover img, .article-image:hover img, .certificate-image:hover img {
+            transform: scale(1.05);
+        }
+        /* Styles pour les pages de projets/articles individuelles (simulées) */
+        .project-detail-page, .article-detail-page {
+            display: none; /* Caché par défaut */
+            padding-top: 80px; /* Pour compenser la barre de navigation fixe */
+            min-height: calc(100vh - 160px); /* Hauteur minimale pour le contenu */
+        }
+        .project-detail-page.active, .article-detail-page.active {
+            display: block; /* Affiché quand actif */
+        }
+        .main-content-sections {
+            display: block; /* Affiché par défaut */
+        }
+        .main-content-sections.hidden {
+            display: none; /* Caché quand une page de détail est active */
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <h1 class="text-xl font-bold text-gray-800">Portfolio Data Science</h1>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#accueil" class="nav-link text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition">Accueil</a>
+                        <a href="#apropos" class="nav-link text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition">À propos</a>
+                        <a href="#competences" class="nav-link text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition">Compétences</a>
+                        <a href="#projets" class="nav-link text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition">Projets</a>
+                        <a href="#articles" class="nav-link text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition">Articles</a>
+                        <a href="#certifications" class="nav-link text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition">Certifications</a>
+                        <a href="#contact" class="nav-link text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition">Contact</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-gray-900 focus:outline-none focus:text-gray-900">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="md:hidden hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white shadow-lg">
+                <a href="#accueil" class="nav-link block px-3 py-2 text-gray-600 hover:text-indigo-600">Accueil</a>
+                <a href="#apropos" class="nav-link block px-3 py-2 text-gray-600 hover:text-indigo-600">À propos</a>
+                <a href="#competences" class="nav-link block px-3 py-2 text-gray-600 hover:text-indigo-600">Compétences</a>
+                <a href="#projets" class="nav-link block px-3 py-2 text-gray-600 hover:text-indigo-600">Projets</a>
+                <a href="#articles" class="nav-link block px-3 py-2 text-gray-600 hover:text-indigo-600">Articles</a>
+                <a href="#certifications" class="nav-link block px-3 py-2 text-gray-600 hover:text-indigo-600">Certifications</a>
+                <a href="#contact" class="nav-link block px-3 py-2 text-gray-600 hover:text-indigo-600">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenu principal des sections (caché si une page de détail est active) -->
+    <div id="main-content-sections" class="main-content-sections">
+        <!-- Hero Section -->
+        <section id="accueil" class="gradient-bg min-h-screen flex items-center justify-center text-white pt-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <div class="mb-8">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/9e14c8ea-69dc-477a-9499-8b68445de7e8.png" alt="Portrait professionnel d'un data scientist souriant avec des lunettes et une chemise bleue sur fond neutre" class="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-white shadow-lg">
+                </div>
+                <h1 class="text-4xl md:text-6xl font-bold mb-4 fade-in">
+                    BELLO Soboure - Data Scientist
+                </h1>
+                <div class="text-xl md:text-2xl mb-8 h-8">
+                    <span id="typing-text" class="typing-animation"></span>
+                </div>
+                <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto fade-in">
+                    Passionné par l'analyse de données et l'intelligence artificielle, je transforme les données en insights stratégiques pour optimiser les performances business.
+                </p>
+                <div class="space-x-4 fade-in">
+                    <a href="#projets" class="bg-white text-indigo-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition inline-block">
+                        Voir mes projets
+                    </a>
+                    <a href="#contact" class="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-indigo-600 transition inline-block">
+                        Me contacter
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- À propos -->
+        <section id="apropos" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 fade-in">À propos de moi</h2>
+                    <div class="w-20 h-1 bg-indigo-600 mx-auto fade-in"></div>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="fade-in">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/233674b2-f281-4c2e-b902-d9a4fc00c854.png" alt="Espace de travail moderne avec plusieurs écrans affichant des visualisations de données, graphiques et analyses statistiques" class="rounded-lg shadow-xl">
+                    </div>
+                    <div class="fade-in">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Transforming Data into Insights</h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed">
+                            Avec plus de 3 ans d'expérience en data science, je me spécialise dans l'analyse prédictive, 
+                            le machine learning et la visualisation de données. Mon approche combine rigueur statistique 
+                            et créativité pour résoudre des problèmes complexes.
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <i class="fas fa-graduation-cap text-indigo-600 mr-3"></i>
+                                <span>Master en Data Science & Intelligence Artificielle</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-chart-line text-indigo-600 mr-3"></i>
+                                <span>15+ projets de machine learning réalisés</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-code text-indigo-600 mr-3"></i>
+                                <span>Expert Python, R, SQL et outils Big Data</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-award text-indigo-600 mr-3"></i>
+                                <span>Certifié Google Cloud & AWS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Compétences -->
+        <section id="competences" class="py-20 bg-gray-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 fade-in">Compétences Techniques</h2>
+                    <div class="w-20 h-1 bg-indigo-600 mx-auto fade-in"></div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Programming Languages -->
+                    <div class="bg-white p-6 rounded-lg shadow-lg card-hover fade-in">
+                        <div class="text-center mb-6">
+                            <i class="fas fa-code text-4xl text-indigo-600 mb-4"></i>
+                            <h3 class="text-xl font-bold text-gray-900">Langages de Programmation</h3>
+                        </div>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Python</span>
+                                    <span class="text-sm font-medium text-gray-700">95%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="skill-bar bg-indigo-600 h-2 rounded-full" data-width="95"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">R</span>
+                                    <span class="text-sm font-medium text-gray-700">85%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="skill-bar bg-indigo-600 h-2 rounded-full" data-width="85"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">SQL</span>
+                                    <span class="text-sm font-medium text-gray-700">90%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="skill-bar bg-indigo-600 h-2 rounded-full" data-width="90"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Machine Learning -->
+                    <div class="bg-white p-6 rounded-lg shadow-lg card-hover fade-in">
+                        <div class="text-center mb-6">
+                            <i class="fas fa-brain text-4xl text-indigo-600 mb-4"></i>
+                            <h3 class="text-xl font-bold text-gray-900">Machine Learning</h3>
+                        </div>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Scikit-learn</span>
+                                    <span class="text-sm font-medium text-gray-700">92%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="skill-bar bg-green-600 h-2 rounded-full" data-width="92"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">TensorFlow</span>
+                                    <span class="text-sm font-medium text-gray-700">80%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="skill-bar bg-green-600 h-2 rounded-full" data-width="80"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">PyTorch</span>
+                                    <span class="text-sm font-medium text-gray-700">75%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="skill-bar bg-green-600 h-2 rounded-full" data-width="75"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Visualisation -->
+                    <div class="bg-white p-6 rounded-lg shadow-lg card-hover fade-in">
+                        <div class="text-center mb-6">
+                            <i class="fas fa-chart-bar text-4xl text-indigo-600 mb-4"></i>
+                            <h3 class="text-xl font-bold text-gray-900">Visualisation</h3>
+                        </div>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Tableau</span>
+                                    <span class="text-sm font-medium text-gray-700">88%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="skill-bar bg-purple-600 h-2 rounded-full" data-width="88"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Power BI</span>
+                                    <span class="text-sm font-medium text-gray-700">85%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="skill-bar bg-purple-600 h-2 rounded-full" data-width="85"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Matplotlib/Seaborn</span>
+                                    <span class="text-sm font-medium text-gray-700">90%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="skill-bar bg-purple-600 h-2 rounded-full" data-width="90"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Outils supplémentaires -->
+                <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="text-center p-4 bg-white rounded-lg shadow card-hover fade-in">
+                        <i class="fab fa-aws text-3xl text-orange-500 mb-2"></i>
+                        <p class="font-semibold">AWS</p>
+                    </div>
+                    <div class="text-center p-4 bg-white rounded-lg shadow card-hover fade-in">
+                        <i class="fab fa-google text-3xl text-blue-500 mb-2"></i>
+                        <p class="font-semibold">Google Cloud</p>
+                    </div>
+                    <div class="text-center p-4 bg-white rounded-lg shadow card-hover fade-in">
+                        <i class="fab fa-docker text-3xl text-blue-600 mb-2"></i>
+                        <p class="font-semibold">Docker</p>
+                    </div>
+                    <div class="text-center p-4 bg-white rounded-lg shadow card-hover fade-in">
+                        <i class="fab fa-git-alt text-3xl text-red-500 mb-2"></i>
+                        <p class="font-semibold">Git</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projets -->
+        <section id="projets" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 fade-in">Projets Réalisés</h2>
+                    <div class="w-20 h-1 bg-indigo-600 mx-auto fade-in"></div>
+                    <p class="mt-4 text-gray-600 max-w-2xl mx-auto fade-in">
+                        Découvrez une sélection de mes projets les plus significatifs en data science et machine learning
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="project-list">
+                    <!-- Projet 1 -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover fade-in" data-project-id="1">
+                        <div class="project-image">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/996d74a7-5ad2-4cd9-987c-3c43665a08ba.png" alt="Interface de prédiction de prix immobilier avec graphiques interactifs, cartes de chaleur et données de marché en temps réel" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                            <div style="display:none;" class="w-full h-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
+                                <i class="fas fa-home text-white text-4xl"></i>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Prédiction Prix Immobilier</h3>
+                            <p class="text-gray-600 mb-4">
+                                Modèle de machine learning pour prédire les prix immobiliers basé sur l'analyse de 50k+ propriétés. 
+                                Précision de 92% avec algorithmes Random Forest et XGBoost.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">Python</span>
+                                <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">Scikit-learn</span>
+                                <span class="px-2 py-1 bg-purple-100 text-purple-800 rounded-full text-xs">Pandas</span>
+                                <span class="px-2 py-1 bg-red-100 text-red-800 rounded-full text-xs">XGBoost</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <a href="#" class="text-indigo-600 hover:text-indigo-800 font-semibold view-project-btn" data-project-id="1">Voir le projet</a>
+                                <div class="flex space-x-2">
+                                    <a href="#" class="text-gray-400 hover:text-gray-600" aria-label="Lien Github du projet"><i class="fab fa-github"></i></a>
+                                    <a href="#" class="text-gray-400 hover:text-gray-600" aria-label="Lien externe du projet"><i class="fas fa-external-link-alt"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Projet 2 -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover fade-in" data-project-id="2">
+                        <div class="project-image">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/90791044-020b-437f-9bf5-5336c7ecad98.png" alt="Dashboard analytique de détection de fraude avec alertes en temps réel, graphiques de tendances et scores de risque colorés" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                            <div style="display:none;" class="w-full h-full bg-gradient-to-br from-red-400 to-red-600 flex items-center justify-center">
+                                <i class="fas fa-shield-alt text-white text-4xl"></i>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Détection de Fraudes</h3>
+                            <p class="text-gray-600 mb-4">
+                                Système de détection de fraudes en temps réel pour transactions financières. 
+                                Réduction de 78% des faux positifs grâce aux techniques d'apprentissage non supervisé.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">Python</span>
+                                <span class="px-2 py-1 bg-orange-100 text-orange-800 rounded-full text-xs">TensorFlow</span>
+                                <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs">Apache Spark</span>
+                                <span class="px-2 py-1 bg-indigo-100 text-indigo-800 rounded-full text-xs">Kafka</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <a href="#" class="text-indigo-600 hover:text-indigo-800 font-semibold view-project-btn" data-project-id="2">Voir le projet</a>
+                                <div class="flex space-x-2">
+                                    <a href="#" class="text-gray-400 hover:text-gray-600" aria-label="Lien Github du projet"><i class="fab fa-github"></i></a>
+                                    <a href="#" class="text-gray-400 hover:text-gray-600" aria-label="Lien externe du projet"><i class="fas fa-external-link-alt"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Projet 3 -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover fade-in" data-project-id="3">
+                        <div class="project-image">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4b911480-c8b8-43d2-9845-011d763098d1.png" alt="Interface d'analyse de sentiment avec nuages de mots, graphiques de polarité émotionnelle et métriques de réseaux sociaux" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                            <div style="display:none;" class="w-full h-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
+                                <i class="fas fa-comments text-white text-4xl"></i>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Analyse de Sentiments</h3>
+                            <p class="text-gray-600 mb-4">
+                                Analyse de sentiments sur 1M+ de commentaires clients avec NLP avancé. 
+                                Classification multi-classes avec 94% de précision utilisant BERT et transformers.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">Python</span>
+                                <span class="px-2 py-1 bg-purple-100 text-purple-800 rounded-full text-xs">NLTK</span>
+                                <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">BERT</span>
+                                <span class="px-2 py-1 bg-orange-100 text-orange-800 rounded-full text-xs">Transformers</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <a href="#" class="text-indigo-600 hover:text-indigo-800 font-semibold view-project-btn" data-project-id="3">Voir le projet</a>
+                                <div class="flex space-x-2">
+                                    <a href="#" class="text-gray-400 hover:text-gray-600" aria-label="Lien Github du projet"><i class="fab fa-github"></i></a>
+                                    <a href="#" class="text-gray-400 hover:text-gray-600" aria-label="Lien externe du projet"><i class="fas fa-external-link-alt"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Projet 4 -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover fade-in" data-project-id="4">
+                        <div class="project-image">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b4c20e50-b035-44ba-93f0-dada10361f2e.png" alt="Système de recommandation e-commerce avec interface utilisateur montrant produits suggérés, filtres et algorithmes de matching" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                            <div style="display:none;" class="w-full h-full bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
+                                <i class="fas fa-shopping-cart text-white text-4xl"></i>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Système de Recommandation</h3>
+                            <p class="text-gray-600 mb-4">
+                                Moteur de recommandation pour e-commerce basé sur le filtrage collaboratif et le contenu. 
+                                Augmentation de 35% du taux de conversion client.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">Python</span>
+                                <span class="px-2 py-1 bg-red-100 text-red-800 rounded-full text-xs">Collaborative Filtering</span>
+                                <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">Surprise</span>
+                                <span class="px-2 py-1 bg-gray-100 text-gray-800 rounded-full text-xs">Flask</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <a href="#" class="text-indigo-600 hover:text-indigo-800 font-semibold view-project-btn" data-project-id="4">Voir le projet</a>
+                                <div class="flex space-x-2">
+                                    <a href="#" class="text-gray-400 hover:text-gray-600" aria-label="Lien Github du projet"><i class="fab fa-github"></i></a>
+                                    <a href="#" class="text-gray-400 hover:text-gray-600" aria-label="Lien externe du projet"><i class="fas fa-external-link-alt"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Projet 5 -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover fade-in" data-project-id="5">
+                        <div class="project-image">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b2a3b831-12ac-46eb-abaa-c09dc1c3d4d8.png" alt="Tableau de bord de prévision de ventes avec graphiques temporels, métriques KPI et prédictions saisonnières colorées" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                            <div style="display:none;" class="w-full h-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center">
+                                <i class="fas fa-chart-line text-white text-4xl"></i>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Prévision de Ventes</h3>
+                            <p class="text-gray-600 mb-4">
+                                Modèle de prévision des ventes avec séries temporelles pour optimiser les stocks. 
+                                Réduction de 25% des coûts d'inventaire grâce aux prédictions ARIMA et Prophet.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">Python</span>
+                                <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs">Prophet</span>
+                                <span class="px-2 py-1 bg-red-100 text-red-800 rounded-full text-xs">ARIMA</span>
+                                <span class="px-2 py-1 bg-purple-100 text-purple-800 rounded-full text-xs">Plotly</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <a href="#" class="text-indigo-600 hover:text-indigo-800 font-semibold view-project-btn" data-project-id="5">Voir le projet</a>
+                                <div class="flex space-x-2">
+                                    <a href="#" class="text-gray-400 hover:text-gray-600" aria-label="Lien Github du projet"><i class="fab fa-github"></i></a>
+                                    <a href="#" class="text-gray-400 hover:text-gray-600" aria-label="Lien externe du projet"><i class="fas fa-external-link-alt"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Projet 6 -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover fade-in" data-project-id="6">
+                        <div class="project-image">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1c9d767a-a3ac-4bb6-b3b7-0c0b714b97ec.png" alt="Interface de computer vision pour classification d'images médicales avec annotations, zones de détection et probabilités diagnostiques" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                            <div style="display:none;" class="w-full h-full bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center">
+                                <i class="fas fa-eye text-white text-4xl"></i>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Classification d'Images Médicales</h3>
+                            <p class="text-gray-600 mb-4">
+                                CNN pour classification automatique d'images radiologiques. 
+                                Précision de 96% pour la détection précoce de pathologies avec ResNet et transfer learning.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">Python</span>
+                                <span class="px-2 py-1 bg-orange-100 text-orange-800 rounded-full text-xs">TensorFlow</span>
+                                <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">OpenCV</span>
+                                <span class="px-2 py-1 bg-purple-100 text-purple-800 rounded-full text-xs">ResNet</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <a href="#" class="text-indigo-600 hover:text-indigo-800 font-semibold view-project-btn" data-project-id="6">Voir le projet</a>
+                                <div class="flex space-x-2">
+                                    <a href="#" class="text-gray-400 hover:text-gray-600" aria-label="Lien Github du projet"><i class="fab fa-github"></i></a>
+                                    <a href="#" class="text-gray-400 hover:text-gray-600" aria-label="Lien externe du projet"><i class="fas fa-external-link-alt"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Articles -->
+        <section id="articles" class="py-20 bg-gray-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 fade-in">Mes Articles</h2>
+                    <div class="w-20 h-1 bg-indigo-600 mx-auto fade-in"></div>
+                    <p class="mt-4 text-gray-600 max-w-2xl mx-auto fade-in">
+                        Découvrez mes réflexions et analyses sur divers sujets de la data science.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="article-list">
+                    <!-- Article 1 -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover fade-in" data-article-id="1">
+                        <div class="article-image">
+                            <img src="https://via.placeholder.com/400x200/667eea/ffffff?text=Article+1" alt="Image d'illustration pour l'article sur l'éthique de l'IA">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">L'Éthique dans l'IA : Un Enjeu Crucial</h3>
+                            <p class="text-gray-600 mb-4 text-sm">
+                                Exploration des défis éthiques liés au développement et à l'implémentation des systèmes d'intelligence artificielle.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">IA</span>
+                                <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">Éthique</span>
+                                <span class="px-2 py-1 bg-purple-100 text-purple-800 rounded-full text-xs">Société</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <a href="#" class="text-indigo-600 hover:text-indigo-800 font-semibold view-article-btn" data-article-id="1">Lire l'article</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Article 2 -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover fade-in" data-article-id="2">
+                        <div class="article-image">
+                            <img src="https://via.placeholder.com/400x200/764ba2/ffffff?text=Article+2" alt="Image d'illustration pour l'article sur les meilleures pratiques de visualisation de données">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Visualisation de Données : Les Meilleures Pratiques</h3>
+                            <p class="text-gray-600 mb-4 text-sm">
+                                Guide des principes fondamentaux pour créer des visualisations de données claires et impactantes.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">DataViz</span>
+                                <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">Design</span>
+                                <span class="px-2 py-1 bg-purple-100 text-purple-800 rounded-full text-xs">Communication</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <a href="#" class="text-indigo-600 hover:text-indigo-800 font-semibold view-article-btn" data-article-id="2">Lire l'article</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Article 3 -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover fade-in" data-article-id="3">
+                        <div class="article-image">
+                            <img src="https://via.placeholder.com/400x200/667eea/ffffff?text=Article+3" alt="Image d'illustration pour l'article sur l'apprentissage par renforcement">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Introduction à l'Apprentissage par Renforcement</h3>
+                            <p class="text-gray-600 mb-4 text-sm">
+                                Les bases de l'apprentissage par renforcement et ses applications dans le monde réel.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">Machine Learning</span>
+                                <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">Reinforcement Learning</span>
+                                <span class="px-2 py-1 bg-purple-100 text-purple-800 rounded-full text-xs">Algorithmes</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <a href="#" class="text-indigo-600 hover:text-indigo-800 font-semibold view-article-btn" data-article-id="3">Lire l'article</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Certifications -->
+        <section id="certifications" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 fade-in">Mes Certifications</h2>
+                    <div class="w-20 h-1 bg-indigo-600 mx-auto fade-in"></div>
+                    <p class="mt-4 text-gray-600 max-w-2xl mx-auto fade-in">
+                        Voici quelques-unes des certifications que j'ai obtenues pour approfondir mes compétences en data science.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Certificat 1: Data Scientist with Python (DataCamp) -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover fade-in">
+                        <div class="certificate-image">
+                            <img src="https://via.placeholder.com/400x200/1a73e8/ffffff?text=DataCamp" alt="Logo DataCamp">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Data Scientist with Python</h3>
+                            <p class="text-gray-600 mb-4 text-sm">
+                                Parcours complet couvrant l'importation, la manipulation, la visualisation de données, le machine learning et la programmation Python pour la science des données.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">DataCamp</span>
+                                <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">Python</span>
+                                <span class="px-2 py-1 bg-purple-100 text-purple-800 rounded-full text-xs">Machine Learning</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <a href="https://www.datacamp.com/statement-of-accomplishment/..." target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 font-semibold flex items-center">
+                                    Voir le certificat <i class="fas fa-external-link-alt ml-2 text-sm"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Certificat 2: Machine Learning (Coursera - Stanford) -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover fade-in">
+                        <div class="certificate-image">
+                            <img src="https://via.placeholder.com/400x200/0056d2/ffffff?text=Coursera" alt="Logo Coursera">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Machine Learning Specialization</h3>
+                            <p class="text-gray-600 mb-4 text-sm">
+                                Cours approfondi par Andrew Ng (Stanford), couvrant les algorithmes fondamentaux, les réseaux de neurones et les meilleures pratiques en ML.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">Coursera</span>
+                                <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">Deep Learning</span>
+                                <span class="px-2 py-1 bg-purple-100 text-purple-800 rounded-full text-xs">Algorithmes ML</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <a href="https://www.coursera.org/account/accomplishments/specialization/..." target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 font-semibold flex items-center">
+                                    Voir le certificat <i class="fas fa-external-link-alt ml-2 text-sm"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Certificat 3: Développeur d'applications Python (OpenClassrooms) -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover fade-in">
+                        <div class="certificate-image">
+                            <img src="https://via.placeholder.com/400x200/f77f00/ffffff?text=OpenClassrooms" alt="Logo OpenClassrooms">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Développeur d'applications Python</h3>
+                            <p class="text-gray-600 mb-4 text-sm">
+                                Parcours certifiant axé sur le développement d'applications robustes avec Python, incluant bases de données et APIs.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">OpenClassrooms</span>
+                                <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">Développement</span>
+                                <span class="px-2 py-1 bg-purple-100 text-purple-800 rounded-full text-xs">Python</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <a href="https://openclassrooms.com/fr/paths/..." target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 font-semibold flex items-center">
+                                    Voir le certificat <i class="fas fa-external-link-alt ml-2 text-sm"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Certificat 4: Google Cloud Professional Data Engineer -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover fade-in">
+                        <div class="certificate-image">
+                            <img src="https://via.placeholder.com/400x200/4285f4/ffffff?text=Google+Cloud" alt="Logo Google Cloud">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Google Cloud Professional Data Engineer</h3>
+                            <p class="text-gray-600 mb-4 text-sm">
+                                Certification sur la conception et la construction de systèmes de traitement de données sur Google Cloud Platform.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">Google Cloud</span>
+                                <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">Big Data</span>
+                                <span class="px-2 py-1 bg-purple-100 text-purple-800 rounded-full text-xs">Cloud</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <a href="https://www.credential.net/..." target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 font-semibold flex items-center">
+                                    Voir le certificat <i class="fas fa-external-link-alt ml-2 text-sm"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="py-20 gradient-bg text-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4 fade-in">Contactez-moi</h2>
+                    <div class="w-20 h-1 bg-white mx-auto fade-in"></div>
+                    <p class="mt-4 text-lg max-w-2xl mx-auto fade-in">
+                        Intéressé par une collaboration ? N'hésitez pas à me contacter pour discuter de vos projets data science.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <div class="fade-in">
+                        <h3 class="text-2xl font-bold mb-6">Restons en contact</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-center">
+                                <i class="fas fa-envelope text-2xl mr-4"></i>
+                                <div>
+                                    <p class="font-semibold">Email</p>
+                                    <a href="mailto:contact@datascientist.com" class="text-gray-200 hover:text-white">contact@datascientist.com</a>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-phone text-2xl mr-4"></i>
+                                <div>
+                                    <p class="font-semibold">Téléphone</p>
+                                    <a href="tel:+33123456789" class="text-gray-200 hover:text-white">+33 1 23 45 67 89</a>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fab fa-linkedin text-2xl mr-4"></i>
+                                <div>
+                                    <p class="font-semibold">LinkedIn</p>
+                                    <a href="#" class="text-gray-200 hover:text-white">linkedin.com/in/datascientist</a>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fab fa-github text-2xl mr-4"></i>
+                                <div>
+                                    <p class="font-semibold">GitHub</p>
+                                    <a href="#" class="text-gray-200 hover:text-white">github.com/datascientist</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fade-in">
+                        <form class="space-y-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium mb-2">Nom complet</label>
+                                <input type="text" id="name" name="name" class="w-full px-4 py-3 bg-white bg-opacity-10 rounded-lg border border-white border-opacity-20 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent" placeholder="Votre nom">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium mb-2">Email</label>
+                                <input type="email" id="email" name="email" class="w-full px-4 py-3 bg-white bg-opacity-10 rounded-lg border border-white border-opacity-20 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent" placeholder="votre.email@exemple.com">
+                            </div>
+                            <div>
+                                <label for="subject" class="block text-sm font-medium mb-2">Sujet</label>
+                                <input type="text" id="subject" name="subject" class="w-full px-4 py-3 bg-white bg-opacity-10 rounded-lg border border-white border-opacity-20 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent" placeholder="Sujet de votre message">
+                            </div>
+                            <div>
+                                <label for="message" class="block text-sm font-medium mb-2">Message</label>
+                                <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 bg-white bg-opacity-10 rounded-lg border border-white border-opacity-20 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent resize-none" placeholder="Décrivez votre projet ou votre demande"></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-white text-indigo-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
+                                Envoyer le message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div> <!-- Fin de main-content-sections -->
+
+    <!-- Pages de Détail des Projets (simulées) -->
+    <section id="project-detail-1" class="project-detail-page py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <button class="back-to-projects-btn text-indigo-600 hover:text-indigo-800 font-semibold mb-8 flex items-center">
+                <i class="fas fa-arrow-left mr-2"></i> Retour aux projets
+            </button>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Détails du Projet : Prédiction Prix Immobilier</h2>
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/996d74a7-5ad2-4cd9-987c-3c43665a08ba.png" alt="Interface de prédiction de prix immobilier" class="rounded-lg shadow-lg mb-8 w-full">
+            <p class="text-gray-700 mb-6 leading-relaxed">
+                Ce projet a consisté à développer un modèle de machine learning robuste pour prédire les prix immobiliers avec une grande précision. J'ai utilisé un ensemble de données de plus de 50 000 propriétés, intégrant des caractéristiques variées telles que la localisation, la taille, le nombre de pièces, et les commodités.
+            </p>
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Méthodologie et Technologies</h3>
+            <ul class="list-disc list-inside text-gray-700 mb-6 space-y-2">
+                <li>**Collecte et Nettoyage des Données :** Utilisation de `Pandas` pour l'ingestion, le nettoyage et la transformation des données brutes. Gestion des valeurs manquantes et encodage des variables catégorielles.</li>
+                <li>**Analyse Exploratoire des Données (EDA) :** Visualisations avec `Matplotlib` et `Seaborn` pour identifier les corrélations, les distributions et les outliers.</li>
+                <li>**Sélection et Ingénierie des Caractéristiques :** Création de nouvelles caractéristiques pertinentes et sélection des plus influentes pour le modèle.</li>
+                <li>**Modélisation :** Implémentation et comparaison de plusieurs algorithmes de régression, notamment `Random Forest` et `XGBoost`, pour leur performance et leur capacité à gérer des données complexes.</li>
+                <li>**Évaluation du Modèle :** Le modèle final a atteint une précision de 92% sur les données de test, mesurée par le R-carré et l'erreur quadratique moyenne (RMSE).</li>
+            </ul>
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Résultats et Impact</h3>
+            <p class="text-gray-700 mb-6 leading-relaxed">
+                Le modèle développé permet d'estimer avec fiabilité le prix d'une propriété, ce qui peut être utile pour les acheteurs, les vendeurs et les agents immobiliers. Il offre une base solide pour des décisions éclairées sur le marché immobilier.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-8">
+                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">Python</span>
+                <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">Scikit-learn</span>
+                <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm font-medium">Pandas</span>
+                <span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm font-medium">XGBoost</span>
+                <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm font-medium">Matplotlib</span>
+            </div>
+            <div class="flex justify-between items-center mt-8">
+                <button class="nav-project-btn text-indigo-600 hover:text-indigo-800 font-semibold flex items-center" data-direction="prev" data-current-project="1">
+                    <i class="fas fa-arrow-left mr-2"></i> Projet Précédent
+                </button>
+                <a href="#" class="text-gray-400 hover:text-gray-600" aria-label="Lien Github du projet"><i class="fab fa-github text-2xl"></i></a>
+                <a href="#" class="text-gray-400 hover:text-gray-600" aria-label="Lien externe du projet"><i class="fas fa-external-link-alt text-2xl"></i></a>
+                <button class="nav-project-btn text-indigo-600 hover:text-indigo-800 font-semibold flex items-center" data-direction="next" data-current-project="1">
+                    Projet Suivant <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="project-detail-2" class="project-detail-page py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <button class="back-to-projects-btn text-indigo-600 hover:text-indigo-800 font-semibold mb-8 flex items-center">
+                <i class="fas fa-arrow-left mr-2"></i> Retour aux projets
+            </button>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Détails du Projet : Détection de Fraudes</h2>
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/90791044-020b-437f-9bf5-5336c7ecad98.png" alt="Dashboard analytique de détection de fraude" class="rounded-lg shadow-lg mb-8 w-full">
+            <p class="text-gray-700 mb-6 leading-relaxed">
+                Ce projet a mis en œuvre un système de détection de fraudes en temps réel pour les transactions financières, visant à minimiser les pertes dues aux activités frauduleuses. L'objectif principal était de réduire le taux de faux positifs tout en maintenant une haute détection des fraudes réelles.
+            </p>
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Méthodologie et Technologies</h3>
+            <ul class="list-disc list-inside text-gray-700 mb-6 space-y-2">
+                <li>**Ingestion de Données en Temps Réel :** Utilisation de `Kafka` pour ingérer des flux de transactions en temps réel.</li>
+                <li>**Traitement Big Data :** `Apache Spark` a été employé pour le traitement et l'analyse des grands volumes de données de transactions.</li>
+                <li>**Modélisation :** Développement de modèles d'apprentissage non supervisé (comme Isolation Forest et Autoencoders avec `TensorFlow`) pour identifier les anomalies sans nécessiter d'exemples de fraudes étiquetés.</li>
+                <li>**Optimisation :** Des techniques d'équilibrage de classes et de réglage des hyperparamètres ont été appliquées pour améliorer la performance du modèle et réduire les faux positifs de 78%.</li>
+            </ul>
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Résultats et Impact</h3>
+            <p class="text-gray-700 mb-6 leading-relaxed">
+                Le système a permis une détection rapide et efficace des transactions frauduleuses, réduisant significativement les pertes financières et améliorant la confiance des utilisateurs. La réduction des faux positifs a également diminué la charge de travail des équipes d'investigation.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-8">
+                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">Python</span>
+                <span class="px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm font-medium">TensorFlow</span>
+                <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm font-medium">Apache Spark</span>
+                <span class="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium">Kafka</span>
+            </div>
+            <div class="flex justify-between items-center mt-8">
+                <button class="nav-project-btn text-indigo-600 hover:text-indigo-800 font-semibold flex items-center" data-direction="prev" data-current-project="2">
+                    <i class="fas fa-arrow-left mr-2"></i> Projet Précédent
+                </button>
+                <a href="#" class="text-gray-400 hover:text-gray-600" aria-label="Lien Github du projet"><i class="fab fa-github text-2xl"></i></a>
+                <a href="#" class="text-gray-400 hover:text-gray-600" aria-label="Lien externe du projet"><i class="fas fa-external-link-alt text-2xl"></i></a>
+                <button class="nav-project-btn text-indigo-600 hover:text-indigo-800 font-semibold flex items-center" data-direction="next" data-current-project="2">
+                    Projet Suivant <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="project-detail-3" class="project-detail-page py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <button class="back-to-projects-btn text-indigo-600 hover:text-indigo-800 font-semibold mb-8 flex items-center">
+                <i class="fas fa-arrow-left mr-2"></i> Retour aux projets
+            </button>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Détails du Projet : Analyse de Sentiments</h2>
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4b911480-c8b8-43d2-9845-011d763098d1.png" alt="Interface d'analyse de sentiment" class="rounded-lg shadow-lg mb-8 w-full">
+            <p class="text-gray-700 mb-6 leading-relaxed">
+                Ce projet a consisté à développer un système d'analyse de sentiments avancé pour traiter plus d'un million de commentaires clients. L'objectif était de classer automatiquement les sentiments (positifs, négatifs, neutres) et d'identifier les thèmes récurrents pour améliorer la satisfaction client.
+            </p>
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Méthodologie et Technologies</h3>
+            <ul class="list-disc list-inside text-gray-700 mb-6 space-y-2">
+                <li>**Prétraitement du Texte :** Utilisation de `NLTK` pour la tokenisation, la suppression des mots vides et la lemmatisation des commentaires.</li>
+                <li>**Représentation Vectorielle :** Exploration de différentes techniques d'embedding de mots, y compris Word2Vec et des embeddings basés sur des transformers.</li>
+                <li>**Modélisation NLP :** Implémentation de modèles de classification multi-classes basés sur des architectures de transformers, notamment `BERT`, pour capturer les nuances sémantiques du langage.</li>
+                <li>**Évaluation :** Le modèle a atteint une précision de 94% dans la classification des sentiments, démontrant sa capacité à comprendre le contexte et l'intention des commentaires.</li>
+            </ul>
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Résultats et Impact</h3>
+            <p class="text-gray-700 mb-6 leading-relaxed">
+                Ce système a fourni des insights précieux sur la perception des clients, permettant à l'entreprise d'identifier rapidement les problèmes, d'améliorer les produits et services, et de renforcer la fidélité client.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-8">
+                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">Python</span>
+                <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm font-medium">NLTK</span>
+                <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">BERT</span>
+                <span class="px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm font-medium">Transformers</span>
+            </div>
+            <div class="flex justify-between items-center mt-8">
+                <button class="nav-project-btn text-indigo-600 hover:text-indigo-800 font-semibold flex items-center" data-direction="prev" data-current-project="3">
+                    <i class="fas fa-arrow-left mr-2"></i> Projet Précédent
+                </button>
+                <a href="#" class="text-gray-400 hover:text-gray-600" aria-label="Lien Github du projet"><i class="fab fa-github text-2xl"></i></a>
+                <a href="#" class="text-gray-400 hover:text-gray-600" aria-label="Lien externe du projet"><i class="fas fa-external-link-alt text-2xl"></i></a>
+                <button class="nav-project-btn text-indigo-600 hover:text-indigo-800 font-semibold flex items-center" data-direction="next" data-current-project="3">
+                    Projet Suivant <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="project-detail-4" class="project-detail-page py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <button class="back-to-projects-btn text-indigo-600 hover:text-indigo-800 font-semibold mb-8 flex items-center">
+                <i class="fas fa-arrow-left mr-2"></i> Retour aux projets
+            </button>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Détails du Projet : Système de Recommandation</h2>
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b4c20e50-b035-44ba-93f0-dada10361f2e.png" alt="Système de recommandation e-commerce" class="rounded-lg shadow-lg mb-8 w-full">
+            <p class="text-gray-700 mb-6 leading-relaxed">
+                Ce projet a développé un moteur de recommandation pour une plateforme e-commerce, visant à personnaliser l'expérience utilisateur et à augmenter le taux de conversion. Le système propose des produits pertinents aux utilisateurs en fonction de leurs préférences et de leur historique d'achat.
+            </p>
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Méthodologie et Technologies</h3>
+            <ul class="list-disc list-inside text-gray-700 mb-6 space-y-2">
+                <li>**Collecte et Préparation des Données :** Traitement des données d'interactions utilisateur (achats, vues, notes) et des métadonnées des produits.</li>
+                <li>**Algorithmes de Recommandation :** Implémentation de techniques de `filtrage collaboratif` (basé sur les utilisateurs et les articles) et de `filtrage basé sur le contenu`. Utilisation de la bibliothèque `Surprise` pour les algorithmes de filtrage collaboratif.</li>
+                <li>**Déploiement :** Intégration du moteur de recommandation dans une application web simple développée avec `Flask` pour simuler un environnement e-commerce.</li>
+                <li>**Optimisation :** Réglage des paramètres pour améliorer la pertinence des recommandations et l'expérience utilisateur.</li>
+            </ul>
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Résultats et Impact</h3>
+            <p class="text-gray-700 mb-6 leading-relaxed">
+                Le système de recommandation a entraîné une augmentation de 35% du taux de conversion client, démontrant l'efficacité de la personnalisation pour stimuler les ventes et l'engagement des utilisateurs.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-8">
+                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">Python</span>
+                <span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm font-medium">Collaborative Filtering</span>
+                <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">Surprise</span>
+                <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm font-medium">Flask</span>
+            </div>
+            <div class="flex justify-between items-center mt-8">
+                <button class="nav-project-btn text-indigo-600 hover:text-indigo-800 font-semibold flex items-center" data-direction="prev" data-current-project="4">
+                    <i class="fas fa-arrow-left mr-2"></i> Projet Précédent
+                </button>
+                <a href="#" class="text-gray-400 hover:text-gray-600" aria-label="Lien Github du projet"><i class="fab fa-github text-2xl"></i></a>
+                <a href="#" class="text-gray-400 hover:text-gray-600" aria-label="Lien externe du projet"><i class="fas fa-external-link-alt text-2xl"></i></a>
+                <button class="nav-project-btn text-indigo-600 hover:text-indigo-800 font-semibold flex items-center" data-direction="next" data-current-project="4">
+                    Projet Suivant <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="project-detail-5" class="project-detail-page py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <button class="back-to-projects-btn text-indigo-600 hover:text-indigo-800 font-semibold mb-8 flex items-center">
+                <i class="fas fa-arrow-left mr-2"></i> Retour aux projets
+            </button>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Détails du Projet : Prévision de Ventes</h2>
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b2a3b831-12ac-46eb-abaa-c09dc1c3d4d8.png" alt="Tableau de bord de prévision de ventes" class="rounded-lg shadow-lg mb-8 w-full">
+            <p class="text-gray-700 mb-6 leading-relaxed">
+                Ce projet a développé un modèle de prévision des ventes basé sur l'analyse de séries temporelles, dans le but d'optimiser la gestion des stocks et de réduire les coûts d'inventaire pour une entreprise de vente au détail.
+            </p>
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Méthodologie et Technologies</h3>
+            <ul class="list-disc list-inside text-gray-700 mb-6 space-y-2">
+                <li>**Analyse de Séries Temporelles :** Étude des tendances, saisonnalités et composantes cycliques des données de ventes historiques.</li>
+                <li>**Modélisation :** Implémentation et comparaison de modèles de séries temporelles tels que `ARIMA` (AutoRegressive Integrated Moving Average) et `Prophet` de Facebook, connus pour leur robustesse avec les données saisonnières.</li>
+                <li>**Visualisation des Prévisions :** Utilisation de `Plotly` pour créer des graphiques interactifs montrant les prévisions de ventes et les intervalles de confiance.</li>
+                <li>**Validation :** Évaluation des modèles à l'aide de métriques comme le MAE (Mean Absolute Error) et le RMSE, assurant la fiabilité des prédictions.</li>
+            </ul>
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Résultats et Impact</h3>
+            <p class="text-gray-700 mb-6 leading-relaxed">
+                Grâce à des prédictions précises, l'entreprise a pu réduire ses coûts d'inventaire de 25% en optimisant les niveaux de stock et en minimisant les ruptures ou les surplus.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-8">
+                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">Python</span>
+                <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm font-medium">Prophet</span>
+                <span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm font-medium">ARIMA</span>
+                <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm font-medium">Plotly</span>
+            </div>
+            <div class="flex justify-between items-center mt-8">
+                <button class="nav-project-btn text-indigo-600 hover:text-indigo-800 font-semibold flex items-center" data-direction="prev" data-current-project="5">
+                    <i class="fas fa-arrow-left mr-2"></i> Projet Précédent
+                </button>
+                <a href="#" class="text-gray-400 hover:text-gray-600" aria-label="Lien Github du projet"><i class="fab fa-github text-2xl"></i></a>
+                <a href="#" class="text-gray-400 hover:text-gray-600" aria-label="Lien externe du projet"><i class="fas fa-external-link-alt text-2xl"></i></a>
+                <button class="nav-project-btn text-indigo-600 hover:text-indigo-800 font-semibold flex items-center" data-direction="next" data-current-project="5">
+                    Projet Suivant <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="project-detail-6" class="project-detail-page py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <button class="back-to-projects-btn text-indigo-600 hover:text-indigo-800 font-semibold mb-8 flex items-center">
+                <i class="fas fa-arrow-left mr-2"></i> Retour aux projets
+            </button>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Détails du Projet : Classification d'Images Médicales</h2>
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1c9d767a-a3ac-4bb6-b3b7-0c0b714b97ec.png" alt="Interface de computer vision pour classification d'images médicales" class="rounded-lg shadow-lg mb-8 w-full">
+            <p class="text-gray-700 mb-6 leading-relaxed">
+                Ce projet a développé un réseau de neurones convolutif (CNN) pour la classification automatique d'images radiologiques, dans le but d'aider au diagnostic précoce de pathologies.
+            </p>
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Méthodologie et Technologies</h3>
+            <ul class="list-disc list-inside text-gray-700 mb-6 space-y-2">
+                <li>**Collecte et Augmentation de Données :** Préparation d'un large dataset d'images médicales et application de techniques d'augmentation pour améliorer la robustesse du modèle.</li>
+                <li>**Modélisation CNN :** Utilisation d'architectures de CNN pré-entraînées comme `ResNet` avec des techniques de `transfer learning` pour tirer parti des connaissances acquises sur de grands ensembles de données d'images.</li>
+                <li>**Traitement d'Images :** `OpenCV` a été utilisé pour le prétraitement des images, y compris le redimensionnement, la normalisation et l'amélioration du contraste.</li>
+                <li>**Framework :** Le modèle a été développé et entraîné en utilisant `TensorFlow` et Keras.</li>
+                <li>**Évaluation :** Le modèle a atteint une précision de 96% dans la classification des pathologies, démontrant son potentiel pour assister les professionnels de la santé.</li>
+            </ul>
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Résultats et Impact</h3>
+            <p class="text-gray-700 mb-6 leading-relaxed">
+                Ce système peut accélérer le processus de diagnostic et potentiellement améliorer la détection précoce de maladies, offrant un outil précieux pour les radiologues et les cliniciens.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-8">
+                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">Python</span>
+                <span class="px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm font-medium">TensorFlow</span>
+                <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">OpenCV</span>
+                <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm font-medium">ResNet</span>
+            </div>
+            <div class="flex justify-between items-center mt-8">
+                <button class="nav-project-btn text-indigo-600 hover:text-indigo-800 font-semibold flex items-center" data-direction="prev" data-current-project="6">
+                    <i class="fas fa-arrow-left mr-2"></i> Projet Précédent
+                </button>
+                <a href="#" class="text-gray-400 hover:text-gray-600" aria-label="Lien Github du projet"><i class="fab fa-github text-2xl"></i></a>
+                <a href="#" class="text-gray-400 hover:text-gray-600" aria-label="Lien externe du projet"><i class="fas fa-external-link-alt text-2xl"></i></a>
+                <button class="nav-project-btn text-indigo-600 hover:text-indigo-800 font-semibold flex items-center" data-direction="next" data-current-project="6">
+                    Projet Suivant <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+    <!-- Fin des pages de détail des projets -->
+
+    <!-- Pages de Détail des Articles (simulées) -->
+    <section id="article-detail-1" class="article-detail-page py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <button class="back-to-articles-btn text-indigo-600 hover:text-indigo-800 font-semibold mb-8 flex items-center">
+                <i class="fas fa-arrow-left mr-2"></i> Retour aux articles
+            </button>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">L'Éthique dans l'IA : Un Enjeu Crucial</h2>
+            <p class="text-gray-500 text-sm mb-4">Publié le 15 Mars 2024</p>
+            <img src="https://via.placeholder.com/800x400/667eea/ffffff?text=Article+1+-+Ethique+IA" alt="Image d'illustration pour l'article sur l'éthique de l'IA" class="rounded-lg shadow-lg mb-8 w-full">
+            <div class="prose max-w-none text-gray-700 leading-relaxed">
+                <p>L'intelligence artificielle (IA) est en train de transformer notre monde à un rythme sans précédent. Des voitures autonomes aux systèmes de recommandation personnalisés, l'IA est partout. Cependant, avec cette puissance vient une responsabilité immense. Les questions éthiques autour de l'IA sont devenues un sujet de discussion central pour les chercheurs, les développeurs, les décideurs politiques et le grand public.</p>
+                <p>Un des principaux défis est celui de la **partialité des données**. Les modèles d'IA apprennent à partir des données qui leur sont fournies. Si ces données reflètent des biais existants dans la société (par exemple, des biais raciaux ou de genre), le modèle d'IA peut non seulement reproduire ces biais, mais aussi les amplifier. Cela peut conduire à des décisions injustes ou discriminatoires dans des domaines critiques comme le recrutement, l'octroi de prêts ou même la justice pénale.</p>
+                <p>La **transparence et l'explicabilité** sont également des préoccupations majeures. De nombreux modèles d'IA, en particulier les réseaux de neurones profonds, sont souvent considérés comme des "boîtes noires". Il est difficile de comprendre comment ils arrivent à leurs décisions. Pour des applications critiques, il est essentiel de pouvoir expliquer pourquoi une décision a été prise, non seulement pour des raisons de responsabilité, mais aussi pour identifier et corriger les erreurs.</p>
+                <p>Enfin, la question de la **responsabilité** est complexe. Qui est responsable lorsqu'un système d'IA commet une erreur ou cause un préjudice ? Est-ce le développeur, l'entreprise qui déploie le système, ou l'utilisateur ? Ces questions nécessitent des cadres juridiques et éthiques clairs qui sont encore en cours d'élaboration.</p>
+                <p>En tant que data scientists, nous avons un rôle crucial à jouer dans la construction d'une IA éthique. Cela implique de :</p>
+                <ul>
+                    <li>Auditer et nettoyer les données pour réduire les biais.</li>
+                    <li>Développer des modèles explicables et interprétables.</li>
+                    <li>Mettre en place des mécanismes de surveillance continue des systèmes d'IA en production.</li>
+                    <li>Participer activement aux discussions sur les normes éthiques et les réglementations.</li>
+                </ul>
+                <p>L'éthique de l'IA n'est pas une contrainte, mais une opportunité de construire des systèmes plus justes, plus fiables et plus bénéfiques pour tous.</p>
+            </div>
+            <div class="flex justify-between items-center mt-8">
+                <button class="nav-article-btn text-indigo-600 hover:text-indigo-800 font-semibold flex items-center" data-direction="prev" data-current-article="1">
+                    <i class="fas fa-arrow-left mr-2"></i> Article Précédent
+                </button>
+                <button class="nav-article-btn text-indigo-600 hover:text-indigo-800 font-semibold flex items-center" data-direction="next" data-current-article="1">
+                    Article Suivant <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="article-detail-2" class="article-detail-page py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <button class="back-to-articles-btn text-indigo-600 hover:text-indigo-800 font-semibold mb-8 flex items-center">
+                <i class="fas fa-arrow-left mr-2"></i> Retour aux articles
+            </button>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Visualisation de Données : Les Meilleures Pratiques</h2>
+            <p class="text-gray-500 text-sm mb-4">Publié le 28 Février 2024</p>
+            <img src="https://via.placeholder.com/800x400/764ba2/ffffff?text=Article+2+-+DataViz+Best+Practices" alt="Image d'illustration pour l'article sur les meilleures pratiques de visualisation de données" class="rounded-lg shadow-lg mb-8 w-full">
+            <div class="prose max-w-none text-gray-700 leading-relaxed">
+                <p>La visualisation de données est l'art de représenter des informations et des données de manière graphique. L'objectif est de rendre les données complexes plus accessibles, compréhensibles et utilisables. Une bonne visualisation peut révéler des tendances, des corrélations et des anomalies qui seraient difficiles à détecter autrement. Voici quelques-unes des meilleures pratiques pour créer des visualisations de données efficaces.</p>
+                <p>1. **Connaissez votre public et votre objectif :** Avant de commencer à concevoir, demandez-vous qui va regarder cette visualisation et quel message vous voulez faire passer. Une visualisation pour des experts techniques sera différente de celle destinée à un public non technique.</p>
+                <p>2. **Choisissez le bon type de graphique :** Tous les graphiques ne sont pas adaptés à toutes les données.
+                    <ul>
+                        <li>Pour montrer des comparaisons : diagrammes à barres, colonnes.</li>
+                        <li>Pour montrer des tendances au fil du temps : graphiques linéaires.</li>
+                        <li>Pour montrer des distributions : histogrammes, boîtes à moustaches.</li>
+                        <li>Pour montrer des relations : nuages de points.</li>
+                        <li>Pour montrer des compositions : diagrammes circulaires (avec prudence), diagrammes en aires empilées.</li>
+                    </ul>
+                </p>
+                <p>3. **Simplifiez et évitez l'encombrement :** Moins c'est souvent plus. Éliminez tout élément inutile qui pourrait distraire le lecteur (bordures excessives, ombres, effets 3D non fonctionnels). Concentrez-vous sur les données elles-mêmes.</p>
+                <p>4. **Utilisez la couleur de manière significative :** La couleur peut être un outil puissant, mais elle doit être utilisée avec intention.
+                    <ul>
+                        <li>Utilisez des palettes de couleurs cohérentes.</li>
+                        <li>Évitez d'utiliser trop de couleurs différentes.</li>
+                        <li>Utilisez la couleur pour mettre en évidence des points clés ou pour différencier des catégories.</li>
+                        <li>Tenez compte de l'accessibilité (daltonisme).</li>
+                    </ul>
+                </p>
+                <p>5. **Fournissez un contexte :** Un titre clair, des étiquettes d'axes, des légendes et des unités sont essentiels. Une brève description ou un commentaire peut également aider le lecteur à interpréter les données.</p>
+                <p>6. **Racontez une histoire :** Une visualisation n'est pas seulement un graphique ; c'est un moyen de raconter une histoire avec des données. Guidez le lecteur à travers les informations pour qu'il puisse tirer ses propres conclusions ou comprendre votre message principal.</p>
+            </div>
+            <div class="flex justify-between items-center mt-8">
+                <button class="nav-article-btn text-indigo-600 hover:text-indigo-800 font-semibold flex items-center" data-direction="prev" data-current-article="2">
+                    <i class="fas fa-arrow-left mr-2"></i> Article Précédent
+                </button>
+                <button class="nav-article-btn text-indigo-600 hover:text-indigo-800 font-semibold flex items-center" data-direction="next" data-current-article="2">
+                    Article Suivant <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="article-detail-3" class="article-detail-page py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <button class="back-to-articles-btn text-indigo-600 hover:text-indigo-800 font-semibold mb-8 flex items-center">
+                <i class="fas fa-arrow-left mr-2"></i> Retour aux articles
+            </button>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Introduction à l'Apprentissage par Renforcement</h2>
+            <p class="text-gray-500 text-sm mb-4">Publié le 10 Janvier 2024</p>
+            <img src="https://via.placeholder.com/800x400/667eea/ffffff?text=Article+3+-+Reinforcement+Learning" alt="Image d'illustration pour l'article sur l'apprentissage par renforcement" class="rounded-lg shadow-lg mb-8 w-full">
+            <div class="prose max-w-none text-gray-700 leading-relaxed">
+                <p>L'apprentissage par renforcement (Reinforcement Learning - RL) est un domaine du machine learning où un agent apprend à prendre des décisions en interagissant avec un environnement. Contrairement à l'apprentissage supervisé (où l'agent apprend à partir de données étiquetées) ou non supervisé (où il trouve des motifs dans des données non étiquetées), le RL apprend par essais et erreurs, en recevant des "récompenses" ou des "pénalités" pour ses actions.</p>
+                <p>Le concept central du RL repose sur quatre éléments principaux :</p>
+                <ol>
+                    <li>**L'Agent :** C'est l'entité qui apprend et prend des décisions.</li>
+                    <li>**L'Environnement :** C'est le monde avec lequel l'agent interagit.</li>
+                    <li>**L'Action :** Ce que l'agent peut faire dans l'environnement.</li>
+                    <li>**La Récompense (Reward) :** Un signal numérique que l'environnement donne à l'agent pour évaluer la qualité de ses actions. L'objectif de l'agent est de maximiser la récompense cumulée au fil du temps.</li>
+                    <li>**L'État (State) :** La situation actuelle de l'environnement, perçue par l'agent.</li>
+                </ol>
+                <p>Le processus d'apprentissage se déroule en boucles : l'agent observe l'état de l'environnement, choisit une action, l'environnement réagit en passant à un nouvel état et en donnant une récompense, et l'agent utilise cette récompense pour ajuster sa stratégie (sa "politique") afin de prendre de meilleures décisions à l'avenir.</p>
+                <p>Les applications de l'apprentissage par renforcement sont vastes et en pleine expansion :</p>
+                <ul>
+                    <li>**Jeux :** AlphaGo de DeepMind, qui a battu le champion du monde de Go, est un exemple emblématique.</li>
+                    <li>**Robotique :** Apprentissage de la marche, de la manipulation d'objets, de la navigation.</li>
+                    <li>**Véhicules autonomes :** Prise de décision pour la conduite.</li>
+                    <li>**Optimisation :** Gestion de portefeuille, optimisation de la chaîne d'approvisionnement, gestion de l'énergie.</li>
+                </ul>
+                <p>Bien que le RL puisse être complexe à mettre en œuvre, son potentiel pour résoudre des problèmes où les données étiquetées sont rares ou où la prise de décision séquentielle est cruciale est immense. C'est un domaine passionnant qui continue d'évoluer rapidement.</p>
+            </div>
+            <div class="flex justify-between items-center mt-8">
+                <button class="nav-article-btn text-indigo-600 hover:text-indigo-800 font-semibold flex items-center" data-direction="prev" data-current-article="3">
+                    <i class="fas fa-arrow-left mr-2"></i> Article Précédent
+                </button>
+                <button class="nav-article-btn text-indigo-600 hover:text-indigo-800 font-semibold flex items-center" data-direction="next" data-current-article="3">
+                    Article Suivant <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+    <!-- Fin des pages de détail des articles -->
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p class="text-gray-400">© 2024 Portfolio Data Science. Tous droits réservés.</p>
+                <div class="mt-4 flex justify-center space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition" aria-label="Lien LinkedIn">
+                        <i class="fab fa-linkedin text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition" aria-label="Lien GitHub">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition" aria-label="Lien Twitter">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition" aria-label="Envoyer un email">
+                        <i class="fas fa-envelope text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('.nav-link').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const target = document.querySelector(targetId);
+
+                // Hide any active detail pages and show main sections
+                document.querySelectorAll('.project-detail-page, .article-detail-page').forEach(page => {
+                    page.classList.remove('active');
+                });
+                document.getElementById('main-content-sections').classList.remove('hidden');
+
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+                // Close mobile menu if open
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Typing animation
+        const texts = [
+            "Spécialiste en Machine Learning",
+            "Expert en Analyse de Données",
+            "Développeur Python & R",
+            "Consultant IA & Big Data"
+        ];
+        let textIndex = 0;
+        let charIndex = 0;
+        const typingElement = document.getElementById('typing-text');
+
+        function typeText() {
+            if (!typingElement) return; // Ensure element exists
+            if (charIndex < texts[textIndex].length) {
+                typingElement.textContent += texts[textIndex].charAt(charIndex);
+                charIndex++;
+                setTimeout(typeText, 100);
+            } else {
+                setTimeout(() => {
+                    charIndex = 0;
+                    typingElement.textContent = '';
+                    textIndex = (textIndex + 1) % texts.length;
+                    typeText();
+                }, 2000);
+            }
+        }
+
+        // Start typing animation
+        typeText();
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with fade-in class
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Animate skill bars when they come into view
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const skillBars = entry.target.querySelectorAll('.skill-bar');
+                    skillBars.forEach(bar => {
+                        const width = bar.dataset.width;
+                        setTimeout(() => {
+                            bar.style.width = width + '%';
+                        }, 500);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        // Observe skill sections
+        document.querySelectorAll('#competences .card-hover').forEach(el => {
+            skillObserver.observe(el);
+        });
+
+        // Contact form handling
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simple form validation
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            if (!name || !email || !subject || !message) {
+                alert('Veuillez remplir tous les champs du formulaire.');
+                return;
+            }
+            
+            // Simulate form submission
+            alert('Merci pour votre message ! Je vous répondrai dans les plus brefs délais.');
+            this.reset();
+        });
+
+        // Add active navigation highlighting
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]:not(.project-detail-page):not(.article-detail-page)'); // Exclure les pages de détail
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('text-indigo-600');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('text-indigo-600');
+                }
+            });
+        });
+
+        // Add parallax effect to hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('#accueil');
+            const heroContent = hero ? hero.querySelector('div') : null;
+            
+            if (heroContent) {
+                heroContent.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+
+        // --- Gestion des pages de projets individuelles (simulées) ---
+        const projectDetailPages = document.querySelectorAll('.project-detail-page');
+        const articleDetailPages = document.querySelectorAll('.article-detail-page');
+        const mainContentSections = document.getElementById('main-content-sections');
+        const totalProjects = document.querySelectorAll('#projets .card-hover').length;
+        const totalArticles = document.querySelectorAll('#articles .card-hover').length;
+
+        function showDetailPage(type, id) {
+            // Hide all main sections
+            mainContentSections.classList.add('hidden');
+            // Hide all detail pages
+            document.querySelectorAll('.project-detail-page, .article-detail-page').forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // Show the specific detail page
+            const targetPage = document.getElementById(`${type}-detail-${id}`);
+            if (targetPage) {
+                targetPage.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top of the page
+            }
+        }
+
+        function hideDetailPages() {
+            document.querySelectorAll('.project-detail-page, .article-detail-page').forEach(page => {
+                page.classList.remove('active');
+            });
+            mainContentSections.classList.remove('hidden');
+            // Scroll back to the relevant section (e.g., #projets or #articles)
+            const currentHash = window.location.hash;
+            if (currentHash === '#projets' || currentHash === '#articles' || currentHash === '#certifications') {
+                document.querySelector(currentHash).scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+                document.querySelector('#projets').scrollIntoView({ behavior: 'smooth', block: 'start' }); // Default to projects
+            }
+        }
+
+        // Event listeners for "Voir le projet" buttons
+        document.querySelectorAll('.view-project-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const projectId = this.dataset.projectId;
+                showDetailPage('project', projectId);
+            });
+        });
+
+        // Event listeners for "Voir l'article" buttons
+        document.querySelectorAll('.view-article-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const articleId = this.dataset.articleId;
+                showDetailPage('article', articleId);
+            });
+        });
+
+        // Event listeners for "Retour aux projets/articles" buttons
+        document.querySelectorAll('.back-to-projects-btn, .back-to-articles-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                hideDetailPages();
+            });
+        });
+
+        // Navigation between projects/articles
+        document.querySelectorAll('.nav-project-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                let currentId = parseInt(this.dataset.currentProject);
+                const direction = this.dataset.direction;
+                let nextId = currentId;
+
+                if (direction === 'next') {
+                    nextId = (currentId % totalProjects) + 1;
+                } else if (direction === 'prev') {
+                    nextId = (currentId - 2 + totalProjects) % totalProjects + 1;
+                }
+                
+                // Update data-current-project for all nav buttons on the current page
+                document.querySelectorAll('.nav-project-btn').forEach(btn => {
+                    btn.dataset.currentProject = nextId;
+                });
+
+                showDetailPage('project', nextId);
+            });
+        });
+
+        document.querySelectorAll('.nav-article-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                let currentId = parseInt(this.dataset.currentArticle);
+                const direction = this.dataset.direction;
+                let nextId = currentId;
+
+                if (direction === 'next') {
+                    nextId = (currentId % totalArticles) + 1;
+                } else if (direction === 'prev') {
+                    nextId = (currentId - 2 + totalArticles) % totalArticles + 1;
+                }
+
+                // Update data-current-article for all nav buttons on the current page
+                document.querySelectorAll('.nav-article-btn').forEach(btn => {
+                    btn.dataset.currentArticle = nextId;
+                });
+                
+                showDetailPage('article', nextId);
+            });
+        });
+
+        // Handle direct URL access to detail pages (e.g., #project-detail-1)
+        window.addEventListener('load', () => {
+            const hash = window.location.hash;
+            if (hash.startsWith('#project-detail-')) {
+                const projectId = hash.split('-').pop();
+                showDetailPage('project', projectId);
+            } else if (hash.startsWith('#article-detail-')) {
+                const articleId = hash.split('-').pop();
+                showDetailPage('article', articleId);
+            }
+        });
+    </script>
+</body>
+</html>

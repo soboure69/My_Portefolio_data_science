@@ -1,0 +1,121 @@
+/* Styles généraux */
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    @apply text-gray-800;
+}
+
+/* Animation de dégradé */
+.gradient-bg {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Effet de survol des cartes */
+.card-hover {
+    transition: all 0.3s ease;
+}
+.card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+/* Barres de compétences */
+.skill-bar {
+    transition: width 1s ease-in-out;
+}
+
+/* Animation de frappe */
+.typing-animation {
+    border-right: 2px solid #667eea;
+    animation: blink 1s infinite;
+}
+@keyframes blink {
+    0%, 50% { border-color: transparent; }
+    51%, 100% { border-color: #667eea; }
+}
+
+/* Animation d'apparition */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+}
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Images des projets/articles */
+.project-image, .article-image, .certificate-image {
+    height: 200px;
+    overflow: hidden;
+    border-radius: 0.5rem 0.5rem 0 0;
+}
+.project-image img, .article-image img, .certificate-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+.project-image:hover img, .article-image:hover img, .certificate-image:hover img {
+    transform: scale(1.05);
+}
+
+/* Navigation */
+.nav-link {
+    position: relative;
+    transition: color 0.3s ease;
+}
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #667eea;
+    transition: width 0.3s ease;
+}
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* Boutons */
+.btn-primary {
+    @apply bg-indigo-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-indigo-700 transition duration-300;
+}
+
+.btn-outline {
+    @apply border-2 border-white text-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-indigo-600 transition duration-300;
+}
+
+/* Sections */
+section {
+    @apply py-20;
+}
+
+/* Formulaire de contact */
+.form-input {
+    @apply w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    section {
+        @apply py-16;
+    }
+    
+    .project-image, .article-image, .certificate-image {
+        height: 180px;
+    }
+}
+
+/* Animations supplémentaires */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+.floating {
+    animation: float 6s ease-in-out infinite;
+}
