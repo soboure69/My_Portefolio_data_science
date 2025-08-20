@@ -1,0 +1,55 @@
+# 🔤 Analyse de Sentiments (NLP avec BERT et Transformers)
+transformers
+torch>=2.0.0
+nltk==3.8.1
+scikit-learn
+pandas
+numpy
+sentencepiece
+datasets
+accelerate
+
+# 📊 Système de Recommandation (Collaboratif + Flask)
+#scikit-surprise
+flask
+flask-cors
+joblib
+scipy
+sqlalchemy
+
+# 📈 Prévision de Ventes (Séries temporelles)
+prophet
+statsmodels
+plotly
+matplotlib
+seaborn
+#pmdarima
+holidays
+
+# 🧠 Classification d’Images Médicales (CNN + ResNet)
+tensorflow
+keras
+opencv-python
+Pillow
+scikit-image
+albumentations
+tqdm
+
+# 🏘️ Prédiction de Vente Immobilier (ML + Feature Engineering)
+xgboost
+lightgbm
+catboost
+mlxtend
+feature-engine
+
+# 🔐 Détection de Fraude Bancaire (ML + Deep Learning)
+imbalanced-learn
+shap
+lime
+keras-tuner
+
+# 🛠️ Utilitaires communs
+requests
+jupyterlab
+notebook
+python-dotenv

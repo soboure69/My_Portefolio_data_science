@@ -14,7 +14,7 @@
     "machine-learning",
     "data-analysis"
   ],
-  "author": "Votre Nom",
+  "author": "Bello Soboure",
   "license": "MIT",
   "devDependencies": {
     "@tailwindcss/aspect-ratio": "^0.4.2",

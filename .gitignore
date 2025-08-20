@@ -54,3 +54,35 @@ yarn-error.log*
 # Project specific
 images/placeholder-*.jpg
 images/placeholder-*.png
+
+# Dossiers à ignorer
+*/data/
+*/models/
+*/__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Fichiers à ignorer
+.DS_Store
+.env
+.venv
+env/
+venv/
+ENV/
