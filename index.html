@@ -3,10 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio de BELLO Soboure, Data Scientist: projets de machine learning, NLP, vision par ordinateur, recommandations, séries temporelles et plus.">
+    <link rel="canonical" href="https://soboure69.github.io/">
+    <meta property="og:title" content="BELLO Soboure — Data Scientist">
+    <meta property="og:description" content="Découvrez mes projets en Data Science: ML, NLP, Computer Vision, Recommandations, Séries temporelles.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://soboure69.github.io/">
+    <meta property="og:image" content="images/Image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="BELLO Soboure — Data Scientist">
+    <meta name="twitter:description" content="Projets, articles et certifications en Data Science.">
+    <meta name="twitter:image" content="images/Image.png">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="manifest" href="site.webmanifest">
+    <meta name="theme-color" content="#6366F1">
+    <link rel="apple-touch-icon" href="apple-touch-icon.svg">
+    <link rel="mask-icon" href="safari-pinned-tab.svg" color="#6366F1">
+    <meta name="msapplication-TileColor" content="#ffffff">
     <title>Portfolio Data Scientist - [BELLO Soboure]</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    </noscript>
     <style>
+        body { font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
         .gradient-bg {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
@@ -66,11 +91,47 @@
         .main-content-sections.hidden {
             display: none; /* Caché quand une page de détail est active */
         }
+        /* Lien d'évitement pour accessibilité */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 16px;
+            background: #1f2937;
+            color: #ffffff;
+            padding: 8px 12px;
+            border-radius: 6px;
+            z-index: 1000;
+            transition: top 0.2s ease;
+        }
+        .skip-link:focus {
+            top: 12px;
+            outline: 2px solid #6366F1;
+            outline-offset: 2px;
+        }
     </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "url": "https://soboure69.github.io/",
+      "name": "BELLO Soboure — Data Scientist"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "BELLO Soboure",
+      "jobTitle": "Data Scientist",
+      "url": "https://soboure69.github.io/",
+      "image": "https://soboure69.github.io/images/Image.png"
+    }
+    </script>
 </head>
 <body class="bg-gray-50">
+    <a href="#main" class="skip-link">Aller au contenu principal</a>
     <!-- Navigation -->
-    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50" role="navigation" aria-label="Navigation principale">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <div class="flex-shrink-0">
@@ -88,7 +149,7 @@
                     </div>
                 </div>
                 <div class="md:hidden">
-                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-gray-900 focus:outline-none focus:text-gray-900">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-gray-900 focus:outline-none focus:text-gray-900" aria-controls="mobile-menu" aria-expanded="false" aria-label="Ouvrir le menu">
                         <i class="fas fa-bars"></i>
                     </button>
                 </div>
@@ -109,14 +170,15 @@
     </nav>
 
     <!-- Contenu principal des sections (caché si une page de détail est active) -->
-    <div id="main-content-sections" class="main-content-sections">
+    <div id="main" class="main-content-sections" role="main" tabindex="-1">
         <!-- Hero Section -->
         <section id="accueil" class="gradient-bg min-h-screen flex items-center justify-center text-white pt-16">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <div class="mb-8">
                     <img src="images/Image.png" 
                          alt="Portrait professionnel" 
-                         class="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-white shadow-lg object-cover">
+                         class="hero-avatar w-32 h-32 rounded-full mx-auto mb-6 border-4 border-white shadow-lg object-cover"
+                         width="128" height="128" decoding="async" fetchpriority="high">
                 </div>
                 <h1 class="text-4xl md:text-6xl font-bold mb-4 fade-in">
                     BELLO Soboure - Data Scientist
@@ -331,13 +393,16 @@
                     <p class="mt-4 text-gray-600 max-w-2xl mx-auto fade-in">
                         Découvrez une sélection de mes projets les plus significatifs en data science et machine learning
                     </p>
+                    <p class="mt-4">
+                        <a href="projects/index.html" class="text-indigo-600 hover:text-indigo-800 font-semibold">Tous les notebooks</a>
+                    </p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="project-list">
                     <!-- Projet 1 -->
                     <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover fade-in" data-project-id="1">
                         <div class="project-image">
-                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/996d74a7-5ad2-4cd9-987c-3c43665a08ba.png" alt="Interface de prédiction de prix immobilier avec graphiques interactifs, cartes de chaleur et données de marché en temps réel" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/996d74a7-5ad2-4cd9-987c-3c43665a08ba.png" alt="Interface de prédiction de prix immobilier avec graphiques interactifs, cartes de chaleur et données de marché en temps réel" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" loading="lazy" decoding="async" width="400" height="225">
                             <div style="display:none;" class="w-full h-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
                                 <i class="fas fa-home text-white text-4xl"></i>
                             </div>
@@ -356,6 +421,7 @@
                             </div>
                             <div class="flex justify-between items-center">
                                 <a href="#" class="text-indigo-600 hover:text-indigo-800 font-semibold view-project-btn" data-project-id="1">Voir le projet</a>
+                                <a href="projects/projet-1/notebooks/prediction_prix_immobilier.ipynb" class="text-sm text-indigo-600 hover:text-indigo-800 font-semibold" target="_blank" rel="noopener">Voir le notebook</a>
                                 <div class="flex space-x-2">
                                     <a href="#" class="text-gray-400 hover:text-gray-600" aria-label="Lien Github du projet"><i class="fab fa-github"></i></a>
                                     <a href="#" class="text-gray-400 hover:text-gray-600" aria-label="Lien externe du projet"><i class="fas fa-external-link-alt"></i></a>
@@ -367,7 +433,7 @@
                     <!-- Projet 2 -->
                     <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover fade-in" data-project-id="2">
                         <div class="project-image">
-                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/90791044-020b-437f-9bf5-5336c7ecad98.png" alt="Dashboard analytique de détection de fraude avec alertes en temps réel, graphiques de tendances et scores de risque colorés" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/90791044-020b-437f-9bf5-5336c7ecad98.png" alt="Dashboard analytique de détection de fraude avec alertes en temps réel, graphiques de tendances et scores de risque colorés" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" loading="lazy" decoding="async" width="400" height="225">
                             <div style="display:none;" class="w-full h-full bg-gradient-to-br from-red-400 to-red-600 flex items-center justify-center">
                                 <i class="fas fa-shield-alt text-white text-4xl"></i>
                             </div>
@@ -386,6 +452,7 @@
                             </div>
                             <div class="flex justify-between items-center">
                                 <a href="#" class="text-indigo-600 hover:text-indigo-800 font-semibold view-project-btn" data-project-id="2">Voir le projet</a>
+                                <a href="projects/projet-2/notebooks/detection_fraudes.ipynb" class="text-sm text-indigo-600 hover:text-indigo-800 font-semibold" target="_blank" rel="noopener">Voir le notebook</a>
                                 <div class="flex space-x-2">
                                     <a href="#" class="text-gray-400 hover:text-gray-600" aria-label="Lien Github du projet"><i class="fab fa-github"></i></a>
                                     <a href="#" class="text-gray-400 hover:text-gray-600" aria-label="Lien externe du projet"><i class="fas fa-external-link-alt"></i></a>
@@ -397,7 +464,7 @@
                     <!-- Projet 3 -->
                     <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover fade-in" data-project-id="3">
                         <div class="project-image">
-                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4b911480-c8b8-43d2-9845-011d763098d1.png" alt="Interface d'analyse de sentiment avec nuages de mots, graphiques de polarité émotionnelle et métriques de réseaux sociaux" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4b911480-c8b8-43d2-9845-011d763098d1.png" alt="Interface d'analyse de sentiment avec nuages de mots, graphiques de polarité émotionnelle et métriques de réseaux sociaux" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" loading="lazy" decoding="async" width="400" height="225">
                             <div style="display:none;" class="w-full h-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
                                 <i class="fas fa-comments text-white text-4xl"></i>
                             </div>
@@ -416,6 +483,7 @@
                             </div>
                             <div class="flex justify-between items-center">
                                 <a href="#" class="text-indigo-600 hover:text-indigo-800 font-semibold view-project-btn" data-project-id="3">Voir le projet</a>
+                                <a href="projects/projet-3/notebooks/analyse_sentiments.ipynb" class="text-sm text-indigo-600 hover:text-indigo-800 font-semibold" target="_blank" rel="noopener">Voir le notebook</a>
                                 <div class="flex space-x-2">
                                     <a href="#" class="text-gray-400 hover:text-gray-600" aria-label="Lien Github du projet"><i class="fab fa-github"></i></a>
                                     <a href="#" class="text-gray-400 hover:text-gray-600" aria-label="Lien externe du projet"><i class="fas fa-external-link-alt"></i></a>
@@ -427,7 +495,7 @@
                     <!-- Projet 4 -->
                     <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover fade-in" data-project-id="4">
                         <div class="project-image">
-                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b4c20e50-b035-44ba-93f0-dada10361f2e.png" alt="Système de recommandation e-commerce avec interface utilisateur montrant produits suggérés, filtres et algorithmes de matching" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b4c20e50-b035-44ba-93f0-dada10361f2e.png" alt="Système de recommandation e-commerce avec interface utilisateur montrant produits suggérés, filtres et algorithmes de matching" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" loading="lazy" decoding="async" width="400" height="225">
                             <div style="display:none;" class="w-full h-full bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
                                 <i class="fas fa-shopping-cart text-white text-4xl"></i>
                             </div>
@@ -446,6 +514,7 @@
                             </div>
                             <div class="flex justify-between items-center">
                                 <a href="#" class="text-indigo-600 hover:text-indigo-800 font-semibold view-project-btn" data-project-id="4">Voir le projet</a>
+                                <a href="projects/projet-4/notebooks/systeme_recommandation.ipynb" class="text-sm text-indigo-600 hover:text-indigo-800 font-semibold" target="_blank" rel="noopener">Voir le notebook</a>
                                 <div class="flex space-x-2">
                                     <a href="#" class="text-gray-400 hover:text-gray-600" aria-label="Lien Github du projet"><i class="fab fa-github"></i></a>
                                     <a href="#" class="text-gray-400 hover:text-gray-600" aria-label="Lien externe du projet"><i class="fas fa-external-link-alt"></i></a>
@@ -457,7 +526,7 @@
                     <!-- Projet 5 -->
                     <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover fade-in" data-project-id="5">
                         <div class="project-image">
-                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b2a3b831-12ac-46eb-abaa-c09dc1c3d4d8.png" alt="Tableau de bord de prévision de ventes avec graphiques temporels, métriques KPI et prédictions saisonnières colorées" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b2a3b831-12ac-46eb-abaa-c09dc1c3d4d8.png" alt="Tableau de bord de prévision de ventes avec graphiques temporels, métriques KPI et prédictions saisonnières colorées" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" loading="lazy" decoding="async" width="400" height="225">
                             <div style="display:none;" class="w-full h-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center">
                                 <i class="fas fa-chart-line text-white text-4xl"></i>
                             </div>
@@ -476,6 +545,7 @@
                             </div>
                             <div class="flex justify-between items-center">
                                 <a href="#" class="text-indigo-600 hover:text-indigo-800 font-semibold view-project-btn" data-project-id="5">Voir le projet</a>
+                                <a href="projects/projet-5/notebooks/prevision_ventes.ipynb" class="text-sm text-indigo-600 hover:text-indigo-800 font-semibold" target="_blank" rel="noopener">Voir le notebook</a>
                                 <div class="flex space-x-2">
                                     <a href="#" class="text-gray-400 hover:text-gray-600" aria-label="Lien Github du projet"><i class="fab fa-github"></i></a>
                                     <a href="#" class="text-gray-400 hover:text-gray-600" aria-label="Lien externe du projet"><i class="fas fa-external-link-alt"></i></a>
@@ -487,7 +557,7 @@
                     <!-- Projet 6 -->
                     <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover fade-in" data-project-id="6">
                         <div class="project-image">
-                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1c9d767a-a3ac-4bb6-b3b7-0c0b714b97ec.png" alt="Interface de computer vision pour classification d'images médicales avec annotations, zones de détection et probabilités diagnostiques" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1c9d767a-a3ac-4bb6-b3b7-0c0b714b97ec.png" alt="Interface de computer vision pour classification d'images médicales avec annotations, zones de détection et probabilités diagnostiques" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" loading="lazy" decoding="async" width="400" height="225">
                             <div style="display:none;" class="w-full h-full bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center">
                                 <i class="fas fa-eye text-white text-4xl"></i>
                             </div>
@@ -506,6 +576,7 @@
                             </div>
                             <div class="flex justify-between items-center">
                                 <a href="#" class="text-indigo-600 hover:text-indigo-800 font-semibold view-project-btn" data-project-id="6">Voir le projet</a>
+                                <a href="projects/projet-6/notebooks/classification_images_medicales.ipynb" class="text-sm text-indigo-600 hover:text-indigo-800 font-semibold" target="_blank" rel="noopener">Voir le notebook</a>
                                 <div class="flex space-x-2">
                                     <a href="#" class="text-gray-400 hover:text-gray-600" aria-label="Lien Github du projet"><i class="fab fa-github"></i></a>
                                     <a href="#" class="text-gray-400 hover:text-gray-600" aria-label="Lien externe du projet"><i class="fas fa-external-link-alt"></i></a>
@@ -532,7 +603,7 @@
                     <!-- Article 1 -->
                     <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover fade-in" data-article-id="1">
                         <div class="article-image">
-                            <img src="https://via.placeholder.com/400x200/667eea/ffffff?text=Article+1" alt="Image d'illustration pour l'article sur l'éthique de l'IA">
+                            <img src="https://via.placeholder.com/400x200/667eea/ffffff?text=Article+1" alt="Image d'illustration pour l'article sur l'éthique de l'IA" loading="lazy" decoding="async" width="400" height="200">
                         </div>
                         <div class="p-6">
                             <h3 class="text-xl font-bold text-gray-900 mb-2">L'Éthique dans l'IA : Un Enjeu Crucial</h3>
@@ -553,7 +624,7 @@
                     <!-- Article 2 -->
                     <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover fade-in" data-article-id="2">
                         <div class="article-image">
-                            <img src="https://via.placeholder.com/400x200/764ba2/ffffff?text=Article+2" alt="Image d'illustration pour l'article sur les meilleures pratiques de visualisation de données">
+                            <img src="https://via.placeholder.com/400x200/764ba2/ffffff?text=Article+2" alt="Image d'illustration pour l'article sur les meilleures pratiques de visualisation de données" loading="lazy" decoding="async" width="400" height="200">
                         </div>
                         <div class="p-6">
                             <h3 class="text-xl font-bold text-gray-900 mb-2">Visualisation de Données : Les Meilleures Pratiques</h3>
@@ -574,7 +645,7 @@
                     <!-- Article 3 -->
                     <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover fade-in" data-article-id="3">
                         <div class="article-image">
-                            <img src="https://via.placeholder.com/400x200/667eea/ffffff?text=Article+3" alt="Image d'illustration pour l'article sur l'apprentissage par renforcement">
+                            <img src="https://via.placeholder.com/400x200/667eea/ffffff?text=Article+3" alt="Image d'illustration pour l'article sur l'apprentissage par renforcement" loading="lazy" decoding="async" width="400" height="200">
                         </div>
                         <div class="p-6">
                             <h3 class="text-xl font-bold text-gray-900 mb-2">Introduction à l'Apprentissage par Renforcement</h3>
@@ -610,7 +681,7 @@
                     <!-- Certificat 1: Data Scientist with Python (DataCamp) -->
                     <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover fade-in">
                         <div class="certificate-image">
-                            <img src="https://via.placeholder.com/400x200/1a73e8/ffffff?text=DataCamp" alt="Logo DataCamp">
+                            <img src="https://via.placeholder.com/400x200/1a73e8/ffffff?text=DataCamp" alt="Logo DataCamp" loading="lazy" decoding="async" width="400" height="200">
                         </div>
                         <div class="p-6">
                             <h3 class="text-xl font-bold text-gray-900 mb-2">Data Scientist with Python</h3>
@@ -633,7 +704,7 @@
                     <!-- Certificat 2: Machine Learning (Coursera - Stanford) -->
                     <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover fade-in">
                         <div class="certificate-image">
-                            <img src="https://via.placeholder.com/400x200/0056d2/ffffff?text=Coursera" alt="Logo Coursera">
+                            <img src="https://via.placeholder.com/400x200/0056d2/ffffff?text=Coursera" alt="Logo Coursera" loading="lazy" decoding="async" width="400" height="200">
                         </div>
                         <div class="p-6">
                             <h3 class="text-xl font-bold text-gray-900 mb-2">Machine Learning Specialization</h3>
@@ -656,7 +727,7 @@
                     <!-- Certificat 3: Développeur d'applications Python (OpenClassrooms) -->
                     <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover fade-in">
                         <div class="certificate-image">
-                            <img src="https://via.placeholder.com/400x200/f77f00/ffffff?text=OpenClassrooms" alt="Logo OpenClassrooms">
+                            <img src="https://via.placeholder.com/400x200/f77f00/ffffff?text=OpenClassrooms" alt="Logo OpenClassrooms" loading="lazy" decoding="async" width="400" height="200">
                         </div>
                         <div class="p-6">
                             <h3 class="text-xl font-bold text-gray-900 mb-2">Développeur d'applications Python</h3>
@@ -679,7 +750,7 @@
                     <!-- Certificat 4: Google Cloud Professional Data Engineer -->
                     <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover fade-in">
                         <div class="certificate-image">
-                            <img src="https://via.placeholder.com/400x200/4285f4/ffffff?text=Google+Cloud" alt="Logo Google Cloud">
+                            <img src="https://via.placeholder.com/400x200/4285f4/ffffff?text=Google+Cloud" alt="Logo Google Cloud" loading="lazy" decoding="async" width="400" height="200">
                         </div>
                         <div class="p-6">
                             <h3 class="text-xl font-bold text-gray-900 mb-2">Google Cloud Professional Data Engineer</h3>
@@ -783,7 +854,7 @@
                 <i class="fas fa-arrow-left mr-2"></i> Retour aux projets
             </button>
             <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Détails du Projet : Prédiction Prix Immobilier</h2>
-            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/996d74a7-5ad2-4cd9-987c-3c43665a08ba.png" alt="Interface de prédiction de prix immobilier" class="rounded-lg shadow-lg mb-8 w-full">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/996d74a7-5ad2-4cd9-987c-3c43665a08ba.png" alt="Interface de prédiction de prix immobilier" class="rounded-lg shadow-lg mb-8 w-full" loading="lazy" decoding="async" width="800" height="450">
             <p class="text-gray-700 mb-6 leading-relaxed">
                 Ce projet a consisté à développer un modèle de machine learning robuste pour prédire les prix immobiliers avec une grande précision. J'ai utilisé un ensemble de données de plus de 50 000 propriétés, intégrant des caractéristiques variées telles que la localisation, la taille, le nombre de pièces, et les commodités.
             </p>
@@ -825,7 +896,7 @@
                 <i class="fas fa-arrow-left mr-2"></i> Retour aux projets
             </button>
             <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Détails du Projet : Détection de Fraudes</h2>
-            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/90791044-020b-437f-9bf5-5336c7ecad98.png" alt="Dashboard analytique de détection de fraude" class="rounded-lg shadow-lg mb-8 w-full">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/90791044-020b-437f-9bf5-5336c7ecad98.png" alt="Dashboard analytique de détection de fraude" class="rounded-lg shadow-lg mb-8 w-full" loading="lazy" decoding="async" width="800" height="450">
             <p class="text-gray-700 mb-6 leading-relaxed">
                 Ce projet a mis en œuvre un système de détection de fraudes en temps réel pour les transactions financières, visant à minimiser les pertes dues aux activités frauduleuses. L'objectif principal était de réduire le taux de faux positifs tout en maintenant une haute détection des fraudes réelles.
             </p>
@@ -865,7 +936,7 @@
                 <i class="fas fa-arrow-left mr-2"></i> Retour aux projets
             </button>
             <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Détails du Projet : Analyse de Sentiments</h2>
-            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4b911480-c8b8-43d2-9845-011d763098d1.png" alt="Interface d'analyse de sentiment" class="rounded-lg shadow-lg mb-8 w-full">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4b911480-c8b8-43d2-9845-011d763098d1.png" alt="Interface d'analyse de sentiment" class="rounded-lg shadow-lg mb-8 w-full" loading="lazy" decoding="async" width="800" height="450">
             <p class="text-gray-700 mb-6 leading-relaxed">
                 Ce projet a consisté à développer un système d'analyse de sentiments avancé pour traiter plus d'un million de commentaires clients. L'objectif était de classer automatiquement les sentiments (positifs, négatifs, neutres) et d'identifier les thèmes récurrents pour améliorer la satisfaction client.
             </p>
@@ -905,7 +976,7 @@
                 <i class="fas fa-arrow-left mr-2"></i> Retour aux projets
             </button>
             <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Détails du Projet : Système de Recommandation</h2>
-            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b4c20e50-b035-44ba-93f0-dada10361f2e.png" alt="Système de recommandation e-commerce" class="rounded-lg shadow-lg mb-8 w-full">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b4c20e50-b035-44ba-93f0-dada10361f2e.png" alt="Système de recommandation e-commerce" class="rounded-lg shadow-lg mb-8 w-full" loading="lazy" decoding="async" width="800" height="450">
             <p class="text-gray-700 mb-6 leading-relaxed">
                 Ce projet a développé un moteur de recommandation pour une plateforme e-commerce, visant à personnaliser l'expérience utilisateur et à augmenter le taux de conversion. Le système propose des produits pertinents aux utilisateurs en fonction de leurs préférences et de leur historique d'achat.
             </p>
@@ -945,7 +1016,7 @@
                 <i class="fas fa-arrow-left mr-2"></i> Retour aux projets
             </button>
             <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Détails du Projet : Prévision de Ventes</h2>
-            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b2a3b831-12ac-46eb-abaa-c09dc1c3d4d8.png" alt="Tableau de bord de prévision de ventes" class="rounded-lg shadow-lg mb-8 w-full">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b2a3b831-12ac-46eb-abaa-c09dc1c3d4d8.png" alt="Tableau de bord de prévision de ventes" class="rounded-lg shadow-lg mb-8 w-full" loading="lazy" decoding="async" width="800" height="450">
             <p class="text-gray-700 mb-6 leading-relaxed">
                 Ce projet a développé un modèle de prévision des ventes basé sur l'analyse de séries temporelles, dans le but d'optimiser la gestion des stocks et de réduire les coûts d'inventaire pour une entreprise de vente au détail.
             </p>
@@ -985,7 +1056,7 @@
                 <i class="fas fa-arrow-left mr-2"></i> Retour aux projets
             </button>
             <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Détails du Projet : Classification d'Images Médicales</h2>
-            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1c9d767a-a3ac-4bb6-b3b7-0c0b714b97ec.png" alt="Interface de computer vision pour classification d'images médicales" class="rounded-lg shadow-lg mb-8 w-full">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1c9d767a-a3ac-4bb6-b3b7-0c0b714b97ec.png" alt="Interface de computer vision pour classification d'images médicales" class="rounded-lg shadow-lg mb-8 w-full" loading="lazy" decoding="async" width="800" height="450">
             <p class="text-gray-700 mb-6 leading-relaxed">
                 Ce projet a développé un réseau de neurones convolutif (CNN) pour la classification automatique d'images radiologiques, dans le but d'aider au diagnostic précoce de pathologies.
             </p>
@@ -1029,7 +1100,7 @@
             </button>
             <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">L'Éthique dans l'IA : Un Enjeu Crucial</h2>
             <p class="text-gray-500 text-sm mb-4">Publié le 15 Mars 2024</p>
-            <img src="https://via.placeholder.com/800x400/667eea/ffffff?text=Article+1+-+Ethique+IA" alt="Image d'illustration pour l'article sur l'éthique de l'IA" class="rounded-lg shadow-lg mb-8 w-full">
+            <img src="https://via.placeholder.com/800x400/667eea/ffffff?text=Article+1+-+Ethique+IA" alt="Image d'illustration pour l'article sur l'éthique de l'IA" class="rounded-lg shadow-lg mb-8 w-full" loading="lazy" decoding="async" width="800" height="400">
             <div class="prose max-w-none text-gray-700 leading-relaxed">
                 <p>L'intelligence artificielle (IA) est en train de transformer notre monde à un rythme sans précédent. Des voitures autonomes aux systèmes de recommandation personnalisés, l'IA est partout. Cependant, avec cette puissance vient une responsabilité immense. Les questions éthiques autour de l'IA sont devenues un sujet de discussion central pour les chercheurs, les développeurs, les décideurs politiques et le grand public.</p>
                 <p>Un des principaux défis est celui de la **partialité des données**. Les modèles d'IA apprennent à partir des données qui leur sont fournies. Si ces données reflètent des biais existants dans la société (par exemple, des biais raciaux ou de genre), le modèle d'IA peut non seulement reproduire ces biais, mais aussi les amplifier. Cela peut conduire à des décisions injustes ou discriminatoires dans des domaines critiques comme le recrutement, l'octroi de prêts ou même la justice pénale.</p>
@@ -1062,7 +1133,7 @@
             </button>
             <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Visualisation de Données : Les Meilleures Pratiques</h2>
             <p class="text-gray-500 text-sm mb-4">Publié le 28 Février 2024</p>
-            <img src="https://via.placeholder.com/800x400/764ba2/ffffff?text=Article+2+-+DataViz+Best+Practices" alt="Image d'illustration pour l'article sur les meilleures pratiques de visualisation de données" class="rounded-lg shadow-lg mb-8 w-full">
+            <img src="https://via.placeholder.com/800x400/764ba2/ffffff?text=Article+2+-+DataViz+Best+Practices" alt="Image d'illustration pour l'article sur les meilleures pratiques de visualisation de données" class="rounded-lg shadow-lg mb-8 w-full" loading="lazy" decoding="async" width="800" height="400">
             <div class="prose max-w-none text-gray-700 leading-relaxed">
                 <p>La visualisation de données est l'art de représenter des informations et des données de manière graphique. L'objectif est de rendre les données complexes plus accessibles, compréhensibles et utilisables. Une bonne visualisation peut révéler des tendances, des corrélations et des anomalies qui seraient difficiles à détecter autrement. Voici quelques-unes des meilleures pratiques pour créer des visualisations de données efficaces.</p>
                 <p>1. **Connaissez votre public et votre objectif :** Avant de commencer à concevoir, demandez-vous qui va regarder cette visualisation et quel message vous voulez faire passer. Une visualisation pour des experts techniques sera différente de celle destinée à un public non technique.</p>
@@ -1105,7 +1176,7 @@
             </button>
             <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Introduction à l'Apprentissage par Renforcement</h2>
             <p class="text-gray-500 text-sm mb-4">Publié le 10 Janvier 2024</p>
-            <img src="https://via.placeholder.com/800x400/667eea/ffffff?text=Article+3+-+Reinforcement+Learning" alt="Image d'illustration pour l'article sur l'apprentissage par renforcement" class="rounded-lg shadow-lg mb-8 w-full">
+            <img src="https://via.placeholder.com/800x400/667eea/ffffff?text=Article+3+-+Reinforcement+Learning" alt="Image d'illustration pour l'article sur l'apprentissage par renforcement" class="rounded-lg shadow-lg mb-8 w-full" loading="lazy" decoding="async" width="800" height="400">
             <div class="prose max-w-none text-gray-700 leading-relaxed">
                 <p>L'apprentissage par renforcement (Reinforcement Learning - RL) est un domaine du machine learning où un agent apprend à prendre des décisions en interagissant avec un environnement. Contrairement à l'apprentissage supervisé (où l'agent apprend à partir de données étiquetées) ou non supervisé (où il trouve des motifs dans des données non étiquetées), le RL apprend par essais et erreurs, en recevant des "récompenses" ou des "pénalités" pour ses actions.</p>
                 <p>Le concept central du RL repose sur quatre éléments principaux :</p>
@@ -1437,6 +1508,37 @@
                 showDetailPage('article', articleId);
             }
         });
+    </div>
+    <script>
+    // Accessibilité: bascule du menu mobile avec gestion ARIA
+    (function() {
+      const btn = document.getElementById('mobile-menu-btn');
+      const menu = document.getElementById('mobile-menu');
+      if (!btn || !menu) return;
+      function toggleMenu(forceState) {
+        const isHidden = menu.classList.contains('hidden');
+        const willOpen = forceState !== undefined ? forceState : isHidden;
+        if (willOpen) {
+          menu.classList.remove('hidden');
+          btn.setAttribute('aria-expanded', 'true');
+          btn.setAttribute('aria-label', 'Fermer le menu');
+        } else {
+          menu.classList.add('hidden');
+          btn.setAttribute('aria-expanded', 'false');
+          btn.setAttribute('aria-label', 'Ouvrir le menu');
+        }
+      }
+      btn.addEventListener('click', () => toggleMenu());
+      // Fermer avec Echap
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') toggleMenu(false);
+      });
+      // Fermer lorsqu'on clique un lien du menu
+      menu.addEventListener('click', (e) => {
+        const t = e.target;
+        if (t && t.tagName === 'A') toggleMenu(false);
+      });
+    })();
     </script>
 </body>
 </html>

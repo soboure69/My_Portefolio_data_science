@@ -1,0 +1,12 @@
+{
+  "name": "Portfolio Data Science",
+  "short_name": "Portfolio DS",
+  "description": "Portfolio et notebooks de projets data science",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#6366F1",
+  "icons": [
+    { "src": "favicon.svg", "type": "image/svg+xml", "sizes": "any" }
+  ]
+}
