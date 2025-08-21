@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://soboure69.github.io/sitemap.xml
+Sitemap: https://myportefoliodata.netlify.app/sitemap.xml
